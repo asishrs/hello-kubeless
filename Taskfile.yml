@@ -1,0 +1,36 @@
+version: '3'
+
+vars:
+  local_registry: localhost:5000
+
+includes:
+  k3d: 
+    taskfile: ./k3d/Taskfile.yml
+    dir: ./k3d/
+  kubeless: 
+    taskfile: ./Taskfile-kubeless.yml
+
+tasks:
+
+  deploy:
+    desc: deploy the function
+    cmds:
+      - kubeless function deploy hello-go --cpu 10m --runtime go1.14 --handler hellogo.Hello --from-file functions/hello.go --dependencies go.mod
+      - kubeless autoscale create hello-go --min 1 --max 4  --metric cpu --value 70
+  
+  remove:
+    desc: remove function 
+    cmds:
+      - kubeless function delete hello-go
+  
+  list:
+    desc: list functions
+    cmds:
+      - kubeless function ls
+
+  call:
+    desc: invoke the function
+    cmds:
+      - kubeless function call hello-go
+
+  

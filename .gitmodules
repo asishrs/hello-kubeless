@@ -1,0 +1,4 @@
+[submodule "k3d"]
+	path = k3d
+	url = https://github.com/asishrs/k3d
+	branch = master

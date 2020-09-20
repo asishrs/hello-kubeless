@@ -1,0 +1,23 @@
+version: '3'
+
+vars:
+  local_registry: localhost:5000
+
+tasks:
+
+  deploy:
+    desc: deploy kubeless
+    cmds:
+      - kubectl create ns kubeless
+      - kubectl create -f https://github.com/kubeless/kubeless/releases/download/{{.RELEASE}}/kubeless-{{.RELEASE}}.yaml
+
+    vars:
+      RELEASE:
+        sh: curl -s https://api.github.com/repos/kubeless/kubeless/releases/latest | grep tag_name | cut -d '"' -f 4
+  
+  remove:
+    desc: remove kubeless 
+    cmds:
+      - kubectl delete ns kubeless
+
+  
