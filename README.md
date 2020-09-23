@@ -22,7 +22,7 @@ Once you install all the prerequisites, follow below steps.
 task kubeless:deploy
 ```
 
-In our case we are deploying the function as well as setting an auto scaling rule to scale the pods up to four based in CPU metric (70%)
+In our case we are deploying the function as well as setting an auto scaling rule to scale the pods up to four based on CPU metric (70%)
 
 ### Deploy function
 
@@ -30,7 +30,7 @@ In our case we are deploying the function as well as setting an auto scaling rul
 task deploy
 ```
 
-It will few seconds for the function to be ready. You can check the __STATUS__ of function using `task list`
+It will take few seconds for the function to be ready. You can check the __STATUS__ of function using `task list`
 
 ### Test the function
 
