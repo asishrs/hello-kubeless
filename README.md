@@ -36,9 +36,11 @@ It will take few seconds for the function to be ready. You can check the __STATU
 
 Invoke the function using `task call`. You can see _Hello world!_ in the output.
 
-Let's create some load. Run `wrk -t5 -c50 -d300s http://localhost:8080/api/v1/namespaces/default/services/hello-go:http-function-port/proxy/` to generate the load. 
+Expose the function as a `http` trigger `task expose`
 
-As the load on the function increase the CPU utilization goes beyond 70% metric threshold and kubeless scaling will start creating more pods (up to 4).
+Let's create some load. Run `wrk -t10 -c100 -d3m --latency http://localhost:8081/hello` to generate the load. 
+
+As the load on the function increase the CPU utilization goes beyond 70% metric threshold and kubeless scaling will start creating more pods.
 
 You can watch the overall CPU using `kubectl get hpa -w`
 
