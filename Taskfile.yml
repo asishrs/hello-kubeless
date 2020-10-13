@@ -15,13 +15,18 @@ tasks:
   deploy:
     desc: deploy the function
     cmds:
-      - kubeless function deploy hello-go --cpu 10m --runtime go1.14 --handler hellogo.Hello --from-file functions/hello.go --dependencies go.mod
-      - kubeless autoscale create hello-go --min 1 --max 4  --metric cpu --value 70
+      - kubeless function deploy hello-go --cpu 100m --runtime go1.14 --handler hellogo.Hello --from-file functions/hello.go --dependencies go.mod
+      - kubeless autoscale create hello-go --min 1 --max 10  --metric cpu --value 70
   
   remove:
     desc: remove function 
     cmds:
       - kubeless function delete hello-go
+
+  expose:
+    desc: expose the http function
+    cmds:
+      - kubeless trigger http create get-hello-go --function-name hello-go --path hello --hostname "localhost"
   
   list:
     desc: list functions

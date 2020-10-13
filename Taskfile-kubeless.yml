@@ -10,6 +10,7 @@ tasks:
     cmds:
       - kubectl create ns kubeless
       - kubectl create -f https://github.com/kubeless/kubeless/releases/download/{{.RELEASE}}/kubeless-{{.RELEASE}}.yaml
+      - kubectl create -f https://raw.githubusercontent.com/kubeless/kubeless-ui/master/k8s.yaml
 
     vars:
       RELEASE:
